@@ -10,6 +10,8 @@
 [![NEAR](https://img.shields.io/badge/NEAR-Testnet-000000?style=flat&logo=near&logoColor=white)](https://near.org)
 [![Filecoin](https://img.shields.io/badge/Filecoin-Storacha-0090FF?style=flat&logo=filecoin&logoColor=white)](https://storacha.network)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat)](LICENSE)
+[![Demo](https://img.shields.io/badge/▶_Demo-YouTube-FF0000?style=flat&logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=TsMkBLaxFzA)
+[![Live](https://img.shields.io/badge/🌐_Live-Vercel-000000?style=flat&logo=vercel&logoColor=white)](https://risk-sentinel-demo.vercel.app/)
 
 <br/>
 
@@ -49,9 +51,10 @@ RiskSentinel is an autonomous 3-agent AI system that:
 
 | | |
 |---|---|
-| **Demo Video** | ▶️ [YouTube Link — add before submitting] |
-| **Live Filecoin Proof** | 🔗 [bafkrei...wevq](https://w3s.link/ipfs/bafkreihzmrpuwm2uqybsuclvp4wymql4nostg3v4t25bjg3uyclcaawevq) |
-| **Vercel Frontend** | 🌐 [Add Vercel URL after deploy] |
+| **Demo Video** | ▶️ [Watch on YouTube](https://www.youtube.com/watch?v=TsMkBLaxFzA) |
+| **Live App** | 🌐 [risk-sentinel-demo.vercel.app](https://risk-sentinel-demo.vercel.app/) |
+| **GitHub** | 💻 [JMadhan1/RiskSentinel](https://github.com/JMadhan1/RiskSentinel) |
+| **Live Filecoin Proof** | 🔗 [bafkrei...wevq](https://ipfs.io/ipfs/bafkreihzmrpuwm2uqybsuclvp4wymql4nostg3v4t25bjg3uyclcaawevq) |
 
 ---
 

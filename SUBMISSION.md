@@ -1,5 +1,9 @@
 # RiskSentinel -- Submission Summary
 
+**Demo Video:** https://www.youtube.com/watch?v=TsMkBLaxFzA
+**Live App:** https://risk-sentinel-demo.vercel.app/
+**GitHub:** https://github.com/JMadhan1/RiskSentinel
+
 ## The Problem
 
 Every day, DeFi users lose funds to liquidation not because they made bad decisions,

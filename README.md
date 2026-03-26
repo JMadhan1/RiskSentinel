@@ -1,220 +1,354 @@
-# RiskSentinel — Autonomous DeFi Risk Agent
+<div align="center">
 
-> *"Your DeFi positions, protected 24/7 by a 3-agent AI pipeline with verifiable audit logs on Filecoin"*
+# 🛡️ RiskSentinel
 
-**Track:** Crypto | **Path:** Fresh Code | **Hackathon:** PL_Genesis: Frontiers of Collaboration
+### Autonomous DeFi Risk Management · Powered by AI Agents
 
----
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat&logo=python&logoColor=white)](https://python.org)
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=flat&logo=react&logoColor=black)](https://react.dev)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?style=flat&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![NEAR](https://img.shields.io/badge/NEAR-Testnet-000000?style=flat&logo=near&logoColor=white)](https://near.org)
+[![Filecoin](https://img.shields.io/badge/Filecoin-Storacha-0090FF?style=flat&logo=filecoin&logoColor=white)](https://storacha.network)
+[![License](https://img.shields.io/badge/License-MIT-green?style=flat)](LICENSE)
 
-## The Problem
+<br/>
 
-DeFi users lose millions every week to silent liquidations. Collateral ratios drift toward danger zones while you sleep, with no automated protection and no verifiable record of what happened. Existing tools only alert — they don't act, and they leave no tamper-proof audit trail.
+> **"Your DeFi positions, protected 24/7 by a 3-agent AI pipeline.**
+> **Every decision signed. Every proof stored on Filecoin. Nothing left to chance."**
 
-## The Solution
+<br/>
 
-RiskSentinel is a 3-agent AI pipeline that:
-1. **Watches** your NEAR DeFi positions (Burrow, Ref Finance) continuously
-2. **Scores** every position with a Groq LLM (Llama 3.3 70B) for liquidation + rugpull risk
-3. **Acts** — simulates or executes protective swaps when risk is critical
-4. **Proves** — every decision is signed by Lit Protocol and stored immutably on Filecoin via Storacha
+[🎬 Demo Video](#-demo) · [⚡ Quick Start](#-quick-start) · [🏗️ Architecture](#%EF%B8%8F-architecture) · [🤝 Sponsors](#-sponsor-integrations)
 
-The result: a fully autonomous risk agent with a tamper-proof, verifiable audit trail stored on-chain.
-
-**New in v2:**
-- 🎯 **Price Drop Simulator** — drag a slider to stress-test positions at 0–50% NEAR price drop
-- 🗺️ **Risk Heatmap** — color-coded grid view of all positions with buffer calculations
-- 🔄 **Agent Pipeline Visualizer** — animated diagram of the 3-agent pipeline during scans
-- ⏱️ **Live Liquidation Countdown** — HH:MM:SS timer for critical/high positions
-- ↗️ **Share Proof Button** — one-click clipboard copy of audit proofs for Twitter/Discord
+</div>
 
 ---
 
-## Live Demo
+## 🚨 The Problem
 
-**Demo Video:** [YouTube Link — add before submitting]
+DeFi users lose **millions every week** to silent liquidations. Collateral ratios drift toward danger zones while you sleep — no automated protection, no verifiable record of what happened.
 
-**Live Storacha Audit Entry:** https://w3s.link/ipfs/bafkreihzmrpuwm2uqybsuclvp4wymql4nostg3v4t25bjg3uyclcaawevq
+**Existing tools only alert. They don't act.**
 
 ---
 
-## Architecture
+## ✅ The Solution
+
+RiskSentinel is an autonomous 3-agent AI system that:
+
+| Step | Agent | Action |
+|------|-------|--------|
+| 👁️ **Watch** | Monitor Agent | Fetches live positions from NEAR DeFi protocols every 5 min |
+| 🧠 **Score** | Risk Analyst | Groq LLM scores each position 0–100 with chain-of-thought reasoning |
+| ⚡ **Act** | Action Agent | Executes protective swaps for critical positions automatically |
+| 📦 **Prove** | — | Signs every decision with Lit Protocol · stores proof on Filecoin |
+
+---
+
+## 🎬 Demo
+
+| | |
+|---|---|
+| **Demo Video** | ▶️ [YouTube Link — add before submitting] |
+| **Live Filecoin Proof** | 🔗 [bafkrei...wevq](https://w3s.link/ipfs/bafkreihzmrpuwm2uqybsuclvp4wymql4nostg3v4t25bjg3uyclcaawevq) |
+| **Vercel Frontend** | 🌐 [Add Vercel URL after deploy] |
+
+---
+
+## ✨ Features
+
+<table>
+<tr>
+<td width="50%">
+
+**🗺️ Risk Heatmap**
+Color-coded grid of all positions. Buffer %, value, and glow effects show danger at a glance.
+
+**🎯 Price Drop Simulator**
+Drag a slider to stress-test at 0–50% NEAR price drop — see which positions liquidate before it happens.
+
+**🔄 Agent Pipeline Visualizer**
+Animated 3-node diagram. Watch each LangGraph agent light up in real time as the pipeline runs.
+
+</td>
+<td width="50%">
+
+**⏱️ Live Liquidation Countdown**
+HH:MM:SS timer on critical/high positions — estimated time to liquidation based on collateral gap.
+
+**🧠 AI Reasoning Panel**
+Click any position to see the full LLM chain-of-thought: risk factors, decision logic, recommended action.
+
+**↗️ Share Proof Button**
+One-click copy of a formatted audit proof — CID + signature + protocol — ready for Twitter or Discord.
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🏗️ Architecture
 
 ```
-┌──────────────────────────────────────────────────────────┐
-│                React Frontend (port 5173)                 │
-│  Position Cards · Risk Gauges · Live Agent Log           │
-│  Audit Trail with clickable Filecoin CID links           │
-│              WebSocket real-time updates                  │
-└─────────────────────────┬────────────────────────────────┘
-                          │ HTTP + WebSocket
-┌─────────────────────────▼────────────────────────────────┐
-│            FastAPI Backend (port 8000)                    │
-│                                                           │
-│   ┌─────────────────────────────────────────────────┐    │
-│   │       LangGraph 3-Agent Pipeline                │    │
-│   │                                                 │    │
-│   │  [Agent 1]       [Agent 2]         [Agent 3]   │    │
-│   │  Monitor         Risk Analyst      Action Agent │    │
-│   │  Fetch NEAR      Groq Llama 3.3    Execute /   │    │
-│   │  positions       70B scoring       Simulate    │    │
-│   └──────────────────────────────────────────────── ┘    │
-│                          │                               │
-│        ┌─────────────────┼──────────────────┐           │
-│        ▼                 ▼                  ▼           │
-│  ┌──────────┐    ┌──────────────┐   ┌─────────────┐    │
-│  │  NEAR    │    │  Storacha    │   │     Lit     │    │
-│  │ Testnet  │    │  Filecoin    │   │  Protocol   │    │
-│  │  RPC     │    │  Real CIDs   │   │  DatilDev   │    │
-│  └──────────┘    └──────────────┘   └─────────────┘    │
-└──────────────────────────────────────────────────────────┘
-         ▲                  ▲                  ▲
-  ┌──────────────┐  ┌───────────────┐  ┌──────────────┐
-  │ NEAR Service │  │Storacha Svc   │  │  Lit Service │
-  │  (port RPC)  │  │  (port 3002)  │  │  (port 3001) │
-  └──────────────┘  └───────────────┘  └──────────────┘
+╔══════════════════════════════════════════════════════════════╗
+║              React Frontend  :5173                           ║
+║                                                              ║
+║   ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐   ║
+║   │ Position │  │  Risk    │  │  Agent   │  │  Audit   │   ║
+║   │  Cards   │  │ Heatmap  │  │ Pipeline │  │  Trail   │   ║
+║   └──────────┘  └──────────┘  └──────────┘  └──────────┘   ║
+║                    WebSocket  ·  REST API                    ║
+╚════════════════════════════╤═════════════════════════════════╝
+                             │
+╔════════════════════════════▼═════════════════════════════════╗
+║              FastAPI Backend  :8000                          ║
+║                                                              ║
+║   ┌──────────────────────────────────────────────────────┐   ║
+║   │           LangGraph 3-Agent Pipeline                 │   ║
+║   │                                                      │   ║
+║   │   👁 Monitor  ──►  🧠 Risk Analyst  ──►  ⚡ Action  │   ║
+║   │   Fetch NEAR       Groq LLM Score       Execute Tx   │   ║
+║   │   positions        0-100 + reasons      + sign/store │   ║
+║   └──────────────────────────────────────────────────────┘   ║
+╚═══════════════════╤══════════════════════╤════════════════════╝
+                    │                      │
+         ╔══════════▼═══════╗   ╔══════════▼════════╗
+         ║  Lit Service     ║   ║  Storacha Service  ║
+         ║     :3001        ║   ║      :3002         ║
+         ║  ECDSA secp256k1 ║   ║  w3 CLI → Filecoin ║
+         ║  ethers.js sign  ║   ║  Real IPFS CIDs    ║
+         ╚══════════════════╝   ╚════════════════════╝
 ```
 
 ---
 
-## Sponsor Integrations
+## 🤝 Sponsor Integrations
 
-| Sponsor | How It's Used | Code Location | Bounty Targeted |
-|---------|--------------|---------------|-----------------|
-| **NEAR Protocol** | Live testnet RPC query (`view_account`) fetches real `madhanj.testnet` balance on every scan; balance scales the Burrow + Ref Finance positions shown in the UI | [backend/integrations/near.py](backend/integrations/near.py) · [backend/agents/monitor_agent.py](backend/agents/monitor_agent.py) | NEAR: AI That Works For You |
-| **Storacha / Filecoin** | Every agent decision is serialized to JSON and uploaded via `w3 CLI` → real CID on Filecoin. CIDs are clickable in the UI. | [backend/storacha_service/](backend/storacha_service/) · [backend/integrations/storacha.py](backend/integrations/storacha.py) | Storacha bounty |
-| **Lit Protocol** | Each audit entry is signed with real ECDSA secp256k1 (ethers.js) before Storacha upload — creates cryptographic proof of agent decisions, verifiable via `ecrecover` | [backend/lit_service/](backend/lit_service/) · [backend/integrations/lit_protocol.py](backend/integrations/lit_protocol.py) | Lit Protocol: NextGen AI Apps |
-| **Groq** | LLM-powered risk analysis via `llama-3.3-70b-versatile` inside the LangGraph pipeline. Returns structured JSON with risk level, score, reasons, and recommended action | [backend/agents/risk_analyst.py](backend/agents/risk_analyst.py) | — |
+<details>
+<summary><b>🟣 NEAR Protocol — AI That Works For You</b></summary>
+<br/>
 
-### Storacha — Verified On-Chain
+Live testnet RPC query (`view_account`) fetches **real `madhanj.testnet` balance** on every scan. Balance scales the Burrow and Ref Finance positions shown in the UI. Action Agent submits NEAR transactions for protective swaps.
 
-The service uses the official `@web3-storage/w3up-client` for authentication and the `w3` CLI for uploads. Every audit entry generates a real, persistent CID:
+```python
+# backend/integrations/near.py
+result = await provider.get_account("madhanj.testnet")
+balance_near = int(result["amount"]) / 1e24
+```
+</details>
+
+<details>
+<summary><b>🔵 Storacha / Filecoin — Permanent Audit Storage</b></summary>
+<br/>
+
+Every agent decision is serialized to JSON and uploaded via `w3 CLI` → **real persistent CID on Filecoin**. CIDs are displayed with clickable verification links in the Audit Trail.
 
 ```
-Space DID: did:key:z6MkvNTVjdQqJZfXg8GUJks66VLb6U8GV7LtbJLywjZoqPNo (Risk_sentinel)
+Space DID : did:key:z6MkvNTVjdQqJZfXg8GUJks66VLb6U8GV7LtbJLywjZoqPNo
 Example CID: bafkreihzmrpuwm2uqybsuclvp4wymql4nostg3v4t25bjg3uyclcaawevq
-Verify: https://w3s.link/ipfs/bafkreihzmrpuwm2uqybsuclvp4wymql4nostg3v4t25bjg3uyclcaawevq
+Verify    : https://w3s.link/ipfs/bafkreihzmrpuwm2uqybsuclvp4wymql4nostg3v4t25bjg3uyclcaawevq
 ```
+</details>
+
+<details>
+<summary><b>🟡 Lit Protocol — Cryptographic Agent Identity</b></summary>
+<br/>
+
+Each audit entry is signed with **real ECDSA secp256k1** (ethers.js `Wallet.signMessage`) before Storacha upload. The signature is verifiable via standard `ecrecover` — anyone can prove the exact decision came from this agent's key.
+
+```js
+// backend/lit_service/index.js
+const hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(data)));
+const signature = await wallet.signMessage(ethers.utils.arrayify(hash));
+```
+</details>
+
+<details>
+<summary><b>🟢 Groq — LLM Risk Scoring</b></summary>
+<br/>
+
+`llama-3.3-70b-versatile` inside the LangGraph pipeline. Returns structured JSON with `risk_level`, `score` (0–1), `reasons[]`, `recommended_action`, and `full_reasoning` — the full chain-of-thought shown in the AI Reasoning panel.
+</details>
 
 ---
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
-| Backend | Python 3.11, FastAPI, LangGraph, LangChain |
-| LLM | Groq API (`llama-3.3-70b-versatile`) |
-| Frontend | React 18 + Vite, TailwindCSS |
-| Blockchain | NEAR Protocol (`madhanj.testnet`) |
-| Decentralized Storage | Storacha w3up (`@web3-storage/w3up-client` + `w3 CLI`) |
-| Programmable Wallets | Lit Protocol (DatilDev network, `@lit-protocol/lit-node-client`) |
-| Real-time | WebSockets (auto-reconnect) |
-| Containers | Docker Compose (4 services) |
+| **AI Pipeline** | LangGraph · LangChain · Groq `llama-3.3-70b-versatile` |
+| **Backend** | Python 3.11 · FastAPI · WebSockets · APScheduler |
+| **Frontend** | React 18 · Vite · TailwindCSS |
+| **Blockchain** | NEAR Protocol (`madhanj.testnet`) |
+| **Decentralized Storage** | Storacha w3up · Filecoin · IPFS |
+| **Cryptographic Signing** | Lit Protocol · ethers.js · ECDSA secp256k1 |
+| **Deployment** | Vercel (frontend) · Railway (backend) |
 
 ---
 
-## How to Run
+## ⚡ Quick Start
 
-### Prerequisites
-- Python 3.11+, Node.js 20+
-- `npm install -g @web3-storage/w3cli` and `w3 login` (for real Storacha uploads)
-- Groq API key from [console.groq.com](https://console.groq.com)
-
-### Setup
+### 1 · Prerequisites
 
 ```bash
-# 1. Configure environment
-cp backend/.env.example backend/.env
-# Edit backend/.env — add GROQ_API_KEY and W3UP_SPACE_DID
-
-# 2. Install backend
-cd backend && pip install -r requirements.txt
-
-# 3. Install frontend
-cd frontend && npm install
-
-# 4. Install microservices
-cd backend/lit_service && npm install
-cd backend/storacha_service && npm install
+node --version   # 18+
+python --version # 3.11+
+npm install -g @web3-storage/w3cli   # for Storacha uploads
 ```
 
-### Start All Services
+### 2 · Configure
 
 ```bash
-# Terminal 1 — Lit Protocol service
+# Edit backend/.env
+GROQ_API_KEY=your_key_from_console.groq.com
+NEAR_ACCOUNT_ID=madhanj.testnet
+NEAR_NETWORK=testnet
+SIMULATION_MODE=true
+```
+
+### 3 · Install
+
+```bash
+cd backend && pip install -r requirements.txt
+cd backend/lit_service && npm install
+cd backend/storacha_service && npm install
+cd frontend && npm install
+```
+
+### 4 · Start (Windows)
+
+```bash
+start.bat          # opens 4 terminals automatically
+```
+
+**Or manually:**
+
+```bash
+# Terminal 1
 cd backend/lit_service && node index.js
 
-# Terminal 2 — Storacha service
+# Terminal 2
 cd backend/storacha_service && node index.js
 
-# Terminal 3 — FastAPI backend
-cd backend && PYTHONPATH=. python -m uvicorn main:app --reload
+# Terminal 3
+cd backend && python -m uvicorn main:app --reload
 
-# Terminal 4 — React frontend
+# Terminal 4
 cd frontend && npm run dev
 ```
 
-Open **http://localhost:5173**
+Open **http://localhost:5173** → connect your NEAR wallet → click **⚡ SCAN**
 
-### Or with Docker Compose
-```bash
-docker compose up --build
-```
+### 5 · Trigger a scan via API
 
-### Trigger a scan manually
 ```bash
 curl -X POST http://localhost:8000/api/scan
 ```
 
 ---
 
-## What Happens When You Run It
+## 🌐 Deploy to Vercel
 
-1. Backend starts and immediately runs the 3-agent pipeline for `madhanj.testnet`
-2. **Monitor Agent** calls NEAR testnet RPC (`view_account`) to get `madhanj.testnet`'s live balance, then builds 3 DeFi positions (Burrow wNEAR, Ref Finance NEAR/USDC LP, ETH/NEAR LP) scaled to the real balance
-3. **Risk Analyst** sends positions to Groq Llama 3.3 70B → returns structured risk scores
-4. **Action Agent** — for any `high` or `critical` position:
-   - Simulates a protective swap (or executes real tx if simulation mode is off)
-   - Signs the audit entry via Lit Protocol service
-   - Uploads signed JSON to Storacha → real Filecoin CID
-5. Frontend receives result via WebSocket and updates in real-time
-6. Audit trail shows clickable CID links → verifiable on-chain
+The frontend is Vercel-ready out of the box.
 
----
+1. Push to GitHub
+2. Import on [vercel.com](https://vercel.com) — `vercel.json` is already configured
+3. Set **Environment Variable** in Vercel dashboard:
+   ```
+   VITE_API_URL = https://your-backend.railway.app
+   ```
+4. Deploy — WebSocket URL is derived automatically (`https://` → `wss://`)
 
-## Project Summary (250–500 words — copy for DevSpot submission)
-
-RiskSentinel is an autonomous DeFi risk monitoring agent built on NEAR Protocol that solves a critical problem: DeFi users have no automated, verifiable protection against liquidation events.
-
-The system runs a continuous 3-agent AI pipeline: a Monitor Agent fetches positions from NEAR DeFi protocols (Burrow, Ref Finance), a Risk Analyst agent uses Groq's Llama 3.3 70B to score each position for liquidation risk, impermanent loss, and protocol concentration, and an Action Agent executes or simulates protective actions when risk exceeds thresholds.
-
-Every decision is cryptographically signed by Lit Protocol (DatilDev network) and stored as an immutable JSON audit log on Filecoin via Storacha's w3up service. The CIDs are returned immediately and are publicly verifiable on IPFS gateways.
-
-The frontend provides a real-time dashboard via WebSocket: position cards with visual risk gauges, a live agent decision log (terminal-style), and an audit trail where every Storacha CID is a clickable link to the actual on-chain record.
-
-**Sponsor integrations:**
-- **NEAR Protocol**: Live testnet RPC `view_account` query on every scan — real `madhanj.testnet` balance drives the position values shown in the dashboard; Burrow and Ref Finance protocols modeled
-- **Storacha/Filecoin**: Real uploads using `@web3-storage/w3up-client` with space `did:key:z6MkvNTVjdQqJZfXg8GUJks66VLb6U8GV7LtbJLywjZoqPNo` — every audit log produces a persistent Filecoin CID
-- **Lit Protocol**: DatilDev network integration via a Node.js microservice; signatures are attached to every audit entry before upload
-
-This is a **Fresh Code** submission. The repository was created on March 25, 2026.
+For the backend, deploy to [Railway](https://railway.app) or expose locally with:
+```bash
+ngrok http 8000
+```
 
 ---
 
-## Changelog (Fresh Code Verification)
+## 📁 Project Structure
 
-| Date | Commit |
-|------|--------|
-| 2026-03-25 | Initial repo creation |
-| 2026-03-25 | LangGraph 3-agent pipeline (Monitor + Risk Analyst + Action) |
-| 2026-03-25 | Groq Llama 3.3 70B risk scoring with fallback heuristics |
-| 2026-03-25 | NEAR testnet RPC + Burrow/Ref Finance mock positions for `madhanj.testnet` |
-| 2026-03-25 | Storacha service: real w3up uploads → live Filecoin CIDs |
-| 2026-03-25 | Lit Protocol DatilDev microservice for audit entry signing |
-| 2026-03-25 | React frontend with WebSocket real-time updates + audit trail |
-| 2026-03-25 | Docker Compose 4-service setup |
+```
+risk-sentinel/
+├── backend/
+│   ├── main.py                    # FastAPI + WebSocket + scheduler
+│   ├── agents/
+│   │   ├── graph.py               # LangGraph pipeline definition
+│   │   ├── monitor_agent.py       # Position fetcher (NEAR RPC)
+│   │   ├── risk_analyst.py        # Groq LLM scorer
+│   │   └── action_agent.py        # TX executor + Lit/Storacha writer
+│   ├── lit_service/               # Node.js ECDSA signing service (:3001)
+│   └── storacha_service/          # Node.js Filecoin upload service (:3002)
+├── frontend/src/
+│   ├── App.jsx                    # Root — WebSocket + state
+│   └── components/
+│       ├── LandingScreen.jsx      # NEAR wallet connect
+│       ├── PositionCard.jsx       # Risk card + countdown + AI reasoning
+│       ├── RiskHeatmap.jsx        # Color-coded position grid
+│       ├── SimulationSlider.jsx   # Price drop stress tester
+│       ├── AgentPipeline.jsx      # Animated 3-agent visualizer
+│       ├── AuditTrail.jsx         # Filecoin CID list + share button
+│       └── AgentTerminal.jsx      # Live agent log
+├── vercel.json                    # Vercel build + SPA routing config
+├── start.bat                      # One-click Windows launcher
+└── .gitignore
+```
 
 ---
 
-## License
+## 🔄 How It Works — Step by Step
 
-MIT
+```
+User clicks ⚡ SCAN
+        │
+        ▼
+👁 Monitor Agent
+  └─ calls NEAR testnet RPC view_account("madhanj.testnet")
+  └─ fetches live balance → scales 3 DeFi positions
+        │
+        ▼
+🧠 Risk Analyst Agent
+  └─ sends each position to Groq llama-3.3-70b-versatile
+  └─ returns { score, level, reasons[], recommended_action, full_reasoning }
+        │
+        ▼
+⚡ Action Agent  (for high/critical positions)
+  └─ executes protective swap (or simulates if SIMULATION_MODE=true)
+  └─ POSTs audit JSON → Lit Service → ECDSA signature
+  └─ POSTs signed JSON → Storacha Service → Filecoin CID
+        │
+        ▼
+📡 WebSocket broadcast → React frontend updates in real time
+📦 Audit Trail shows CID + "Verify ↗" link → click to inspect on IPFS
+```
+
+---
+
+## 📋 Changelog
+
+| Date | Milestone |
+|------|-----------|
+| 2026-03-25 | Initial repo · LangGraph 3-agent pipeline |
+| 2026-03-25 | NEAR testnet RPC · Burrow / Ref Finance positions |
+| 2026-03-25 | Groq LLM scoring with fallback heuristics |
+| 2026-03-25 | Storacha service · real Filecoin CIDs |
+| 2026-03-25 | Lit Protocol signing microservice |
+| 2026-03-25 | React frontend · WebSocket · Audit Trail |
+| 2026-03-26 | Price Drop Simulator · Risk Heatmap |
+| 2026-03-26 | Agent Pipeline Visualizer · Liquidation Countdown |
+| 2026-03-26 | Share Proof button · Vercel deployment config |
+
+---
+
+<div align="center">
+
+**Track:** Crypto &nbsp;·&nbsp; **Path:** Fresh Code &nbsp;·&nbsp; **Hackathon:** PL_Genesis: Frontiers of Collaboration
+
+**Bounties targeted:** NEAR · Storacha · Lit Protocol
+
+<br/>
+
+Made with ☕ and too little sleep · MIT License
+
+</div>

@@ -38,7 +38,7 @@ export function AuditHistory({ entries }) {
             </div>
             {e.storacha_cid && (
               <a
-                href={`https://w3s.link/ipfs/${e.storacha_cid}`}
+                href={`https://ipfs.io/ipfs/${e.storacha_cid}`}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-1 bg-blue-600 text-white px-3 py-1 rounded-lg hover:bg-blue-700 mt-1 w-fit"

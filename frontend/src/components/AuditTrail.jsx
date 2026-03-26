@@ -13,7 +13,7 @@ function ShareButton({ entry }) {
         ? `📦 Audit proof stored on Filecoin:\n${entry.cid}`
         : null,
       entry.cid
-        ? `🔗 Verify: https://w3s.link/ipfs/${entry.cid}`
+        ? `🔗 Verify: https://ipfs.io/ipfs/${entry.cid}`
         : null,
       `\n#DeFi #NEAR #Filecoin #LitProtocol #RiskSentinel`,
     ].filter(Boolean).join('\n');
@@ -146,7 +146,7 @@ export default function AuditTrail({ entries = [] }) {
                   flex: 1,
                 }}>{entry.cid}</span>
                 <a
-                  href={`https://w3s.link/ipfs/${entry.cid}`}
+                  href={`https://ipfs.io/ipfs/${entry.cid}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{

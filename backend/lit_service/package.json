@@ -1,0 +1,17 @@
+{
+  "name": "risksentinel-lit-service",
+  "version": "1.0.0",
+  "description": "Lit Protocol signing microservice for RiskSentinel",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@lit-protocol/auth-helpers": "^6.11.0",
+    "@lit-protocol/constants": "^6.11.0",
+    "@lit-protocol/lit-node-client": "^6.11.0",
+    "dotenv": "^16.6.1",
+    "ethers": "^5.7.2",
+    "express": "^4.18.2"
+  }
+}

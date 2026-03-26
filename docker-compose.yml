@@ -1,0 +1,53 @@
+version: "3.9"
+services:
+  lit_service:
+    build:
+      context: ./backend/lit_service
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    env_file:
+      - ./backend/.env
+    environment:
+      - LIT_SERVICE_PORT=3001
+
+  storacha_service:
+    build:
+      context: ./backend/storacha_service
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    env_file:
+      - ./backend/.env
+    environment:
+      - STORACHA_SERVICE_PORT=3002
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    environment:
+      - LIT_SERVICE_URL=http://lit_service:3001
+      - STORACHA_SERVICE_URL=http://storacha_service:3002
+    volumes:
+      - ./backend:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    depends_on:
+      - lit_service
+      - storacha_service
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+    command: npm run dev -- --host
+    depends_on:
+      - backend

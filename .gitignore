@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+.env
+
+# Node
+node_modules/
+frontend/node_modules/
+backend/lit_service/node_modules/
+backend/storacha_service/node_modules/
+
+# Build output
+frontend/dist/
+frontend/.vite/
+
+# Misc
+*.log
+run.js
+.DS_Store
+Thumbs.db
